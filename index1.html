@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        .product{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button{
+            background-color: gray;
+            width: 200px;
+            height: 50px;
+            
+        }
+        .text{
+            width: 220px;
+            height: 240px;
+            border: 2px solid black;
+            padding: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product">
+            <div class="productName">Iliya</div>
+            <img src="img/Layer_1.jpg" alt="Layer_1" id="img1" class="imgAb">
+            <button class="button" id="1">Подробнее</button>
+        </div>
+        <div class="product">
+            <div class="productName">Mariya</div>
+            <img src="img/Layer_2.jpg" alt="Layer_2" id="img2" class="imgAb">
+            <button class="button" id="2">Подробнее</button>
+        </div>
+        <div class="product">
+            <div class="productName">Igor</div>
+            <img src="img/Layer_3.jpg" alt="Layer_3" id="img3" class="imgAb">
+            <button class="button" id="3">Подробнее</button>
+        </div>
+    </div>
+    <script>
+        'use strict';
+        /*
+        Здравствуйте Игорь вначале как вы рекомендовали я начинал решат эту задачи но тут на мой метод решение 
+        могу добавить текст и исчезать фото но обратно не получается и поэтому я потом после того смотрил ваше 
+        фильм и решил то задачи !!! у меня есть вопрос, вы как думайте есть решение на мой первый код на коментарий??
+        ||||||||||||||||||||||||||| БОЛЬШОЙ СОПСИБО ИГОРЬ|||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
+        */
+        /*
+        let divProducts=document.getElementsByClassName('product');
+        console.log(divProducts);
+        let images=document.querySelectorAll('img');
+        console.log(images);
+        let buttons=document.querySelectorAll('button');
+        console.log(buttons);
+        buttons.forEach(function(button){
+            button.addEventListener('click', function(e){
+
+                let text=document.createElement('p');
+                
+                let i=button.id-1;
+                //console.log(i);
+                    images[i].style.display='none';
+                    text.innerText="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi dolores non adipisci unde? Harum."
+                    text.classList.add('text');
+                    divProducts[i].insertAdjacentElement("afterbegin",text);
+                    console.log(i);
+
+            })
+        })
+        
+       */
+
+        let buttons=document.querySelectorAll('button');
+        buttons.forEach(function(button){
+            button.addEventListener('click', function(event){
+                buttonClick(event);
+            })
+        })
+
+        function buttonClick(event){
+            let cardNode=event.target.parentNode;
+            const card={
+                wrap :cardNode,
+                img : cardNode.querySelector('img'),
+                productName : cardNode.querySelector('.productName'),
+                button :cardNode.querySelector('button'),
+            };
+
+            let innerTextButton = card.button.innerText;
+            if(innerTextButton === 'Подробнее'){
+                showText(card);
+            }else if(innerTextButton === 'Отмена'){
+                showImg(card);
+            }
+
+        };
+
+        
+
+        function showText(card){
+              card.img.style.display='none';
+              let text = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse corrupti facere consequuntur consectetur?';
+              card.productName.insertAdjacentHTML("afterend",`<div class="text">${text}</div>`);
+              card.button.innerText="Отмена";
+        };
+
+        function showImg(card){
+            card.wrap.querySelector('.text').remove();
+            card.img.style.display="block";
+            card.button.innerText="Подробнее";
+
+        }
+
+
+        
+            
+       
+            
+             
+            
+       
+        
+        
+    </script>
+   
+</body>
+</html>
